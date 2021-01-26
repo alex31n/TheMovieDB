@@ -12,6 +12,7 @@ import com.alex.themoviedb.R
 import com.alex.themoviedb.databinding.FragmentDetailsBinding
 import com.alex.themoviedb.model.Movie
 import com.alex.themoviedb.utils.Constants
+import org.apache.commons.lang3.text.WordUtils
 
 private const val TAG = "DetailsFragment"
 
@@ -48,7 +49,7 @@ class DetailsFragment : Fragment() {
 
         if (movie != null) {
             binding.movie = movie
-
+            activity?.title= movie?.title.toString()
         }
 
         movie?.movieId?.let {

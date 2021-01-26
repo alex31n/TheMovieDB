@@ -61,24 +61,12 @@ class SliderAdapter (private val movieItemClick: (Movie) -> Unit): SliderViewAda
         viewHolder.bind(movie)
 
         viewHolder.itemView.setOnClickListener{
-//            movieItemClick(movie)
+            movieItemClick(movie)
         }
 
     }
 
-    /*class SliderAdapterVH(view: View) : ViewHolder(view) {
-//        lateinit var itemView: View
-        var imageViewBackground: ImageView
-        var imageGifContainer: ImageView
-        var textViewDescription: TextView
 
-        init {
-            imageViewBackground = itemView.findViewById(R.id.iv_auto_image_slider)
-            imageGifContainer = itemView.findViewById(R.id.iv_gif_container)
-            textViewDescription = itemView.findViewById(R.id.tv_auto_image_slider)
-//            itemView = view
-        }
-    }*/
     class SliderViewHolder(binding: ImageSliderLayoutItemBinding) : ViewHolder(binding.root) {
 
         private val binding: ImageSliderLayoutItemBinding = binding

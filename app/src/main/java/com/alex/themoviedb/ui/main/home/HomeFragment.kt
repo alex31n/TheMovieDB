@@ -16,6 +16,7 @@ import com.alex.themoviedb.model.Movie
 import com.alex.themoviedb.utils.Constants
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
+import org.apache.commons.lang3.text.WordUtils
 
 private const val TAG = "HomeFragment"
 
@@ -51,6 +52,8 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        activity?.title= getString(R.string.app_name)
 
         initView()
         observeData()

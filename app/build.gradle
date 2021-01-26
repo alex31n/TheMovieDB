@@ -104,4 +104,5 @@ dependencies {
     implementation 'com.github.florent37:shapeofview:1.4.7'
 
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    implementation 'org.apache.commons:commons-lang3:3.11'
 }

@@ -7,8 +7,8 @@ class Constants {
         const val KEY_TERM = "term"
         const val KEY_ID = "id"
         const val KEY_MOVIE = "movie"
-        const val TERM_POPULAR = "popular"
-        const val TERM_UPCOMING = "upcoming"
-        const val TERM_TOP_RATED = "top_rated"
+        const val TERM_POPULAR = "popular_movies"
+        const val TERM_UPCOMING = "upcoming_movies"
+        const val TERM_TOP_RATED = "top_rated_movies"
     }
 }

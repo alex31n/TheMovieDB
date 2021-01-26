@@ -15,6 +15,8 @@ import com.alex.themoviedb.R
 import com.alex.themoviedb.databinding.FragmentPopularBinding
 import com.alex.themoviedb.model.Movie
 import com.alex.themoviedb.utils.Constants
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.text.WordUtils
 
 
 private const val TAG = "PopularFragment"
@@ -23,13 +25,13 @@ class PopularFragment : Fragment() {
 
     private lateinit var binding: FragmentPopularBinding
     private lateinit var viewModel: PopularViewModel
-    private lateinit var movieAdapter :MovieAdapter
+    private lateinit var movieAdapter: MovieAdapter
 
-    private var TERM :String?=null
+    private var TERM: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-            TERM = arguments?.getString(Constants.KEY_TERM, Constants.TERM_POPULAR)
+        TERM = arguments?.getString(Constants.KEY_TERM, Constants.TERM_POPULAR)
 
         viewModel = ViewModelProvider(this).get(PopularViewModel::class.java)
         movieAdapter = MovieAdapter(this::movieItemClick)
@@ -63,7 +65,9 @@ class PopularFragment : Fragment() {
 
         TERM?.let {
             viewModel.searchMovies(TERM.toString())
+            activity?.title= WordUtils.capitalize(TERM.toString().replace("_"," "))
         }
+
 
 
     }
@@ -77,11 +81,11 @@ class PopularFragment : Fragment() {
     }
 
 
-    private fun movieItemClick(movie: Movie){
+    private fun movieItemClick(movie: Movie) {
 //        Log.d(TAG, "movieItemClick: $movie")
 //        val bundle = bundleOf("id" to movie.id)
         val bundle = bundleOf(Constants.KEY_MOVIE to movie)
-        findNavController().navigate(R.id.action_PopularFragment_to_DetailsFragment,bundle)
+        findNavController().navigate(R.id.action_PopularFragment_to_DetailsFragment, bundle)
     }
 
 
