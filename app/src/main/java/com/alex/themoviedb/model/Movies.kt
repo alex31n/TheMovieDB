@@ -1,10 +1,10 @@
 package com.alex.themoviedb.model
 
-import com.google.gson.annotations.SerializedName
+import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Movies(
     val page :Int,
     val results: List<Movie>,
-    @SerializedName("total_pages") val totalPages: Int,
-    @SerializedName("total_results") val totalResults: Int
+    @JsonProperty("total_pages") val totalPages: Int,
+    @JsonProperty("total_results") val totalResults: Int
 )

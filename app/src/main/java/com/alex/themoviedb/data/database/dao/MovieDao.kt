@@ -1,6 +1,7 @@
 package com.alex.themoviedb.data.database.dao
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.alex.themoviedb.model.Movie
 import io.reactivex.Flowable
@@ -11,6 +12,9 @@ interface MovieDao {
     @Query("select * from movie")
     fun getAll(): LiveData<List<Movie>>
 
+    @Query("select * from movie WHERE term = :id")
+    fun get(id:Int): LiveData<Movie>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(movieEntity: Movie)
 
@@ -18,8 +22,18 @@ interface MovieDao {
     fun insertAll(vararg movieEntity: Movie)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(movieEntities: List<Movie>)
+    fun insertAll(movieEntities: List<Movie>)
 
     @Delete
-    suspend fun delete(movieEntity: Movie)
+    fun delete(movieEntity: Movie)
+
+    @Query("select * from movie WHERE term = :term ORDER BY indexInResponse ASC")
+    fun getByTerm(term:String): DataSource.Factory<Int, Movie>
+
+    @Query("SELECT MAX(indexInResponse) + 1 FROM movie WHERE term = :term")
+    fun getMaxIndexInTerm(term:String) : Int
+
+    @Query("select * from movie WHERE term = :term ORDER BY RANDOM() LIMIT 5")
+    fun getByRandomTerm(term:String): LiveData<List<Movie>>
+
 }

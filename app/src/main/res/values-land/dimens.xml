@@ -10,5 +10,5 @@
     <dimen name="item_vertical_space">16dp</dimen>
     <dimen name="item_horizontal_space">8dp</dimen>
     <dimen name="cast_thumbnail_width">120dp</dimen>
-    <dimen name="home_movie_thumbnail_width">150dp</dimen>
+    <dimen name="home_movie_thumbnail_width">120dp</dimen>
 </resources>

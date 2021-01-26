@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
@@ -14,6 +15,15 @@ android {
         // viewBinding true
     }
 
+    signingConfigs {
+        release_configs {
+            storeFile file('../utils/the_movie_db_key.jks')
+            storePassword '123456789'
+            keyPassword '123456789'
+            keyAlias 'key0'
+        }
+    }
+
     defaultConfig {
         applicationId "com.alex.themoviedb"
         minSdkVersion 21
@@ -22,12 +32,23 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        signingConfig signingConfigs.release_configs
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release_configs
+            multiDexEnabled true
+        }
+
+        debug {
+            signingConfig signingConfigs.release_configs
+            multiDexEnabled true
+//            minifyEnabled true
         }
     }
     compileOptions {
@@ -48,6 +69,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -68,7 +90,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.12.0"
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
@@ -82,6 +106,14 @@ dependencies {
     //RxAndroid
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
+    def paging_version = "2.1.2"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version" // For Kotlin use paging-runtime-ktx
+    // optional - RxJava support
+    //implementation "androidx.paging:paging-rxjava2-ktx:$paging_version" // For Kotlin use paging-rxjava2-ktx
 
-    implementation 'org.modelmapper:modelmapper:2.3.0'
+
+    implementation 'com.flaviofaria:kenburnsview:1.0.7'
+
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    implementation 'org.apache.commons:commons-lang3:3.11'
 }

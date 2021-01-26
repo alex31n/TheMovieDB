@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="movie"
+            type="com.alex.themoviedb.model.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".ui.main.DetailsFragment">
+
+        <FrameLayout
+            android:id="@+id/thumbnailView"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.flaviofaria.kenburnsview.KenBurnsView
+                android:id="@+id/image"
+                image="@{`https://image.tmdb.org/t/p/w342`+movie.image}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            app:layout_constraintLeft_toRightOf="@id/thumbnailView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/releaseDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/content_space"
+                    android:layout_marginTop="@dimen/item_vertical_space"
+                    android:text="@{`Release: `+movie.releaseDate}"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/rateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/content_space"
+                    android:drawablePadding="5dp"
+                    android:gravity="start|center_vertical"
+                    android:text="@{movie.voteAverage+`(`+movie.voteCount+`)`}"
+                    android:textColor="@color/white"
+                    app:drawableStartCompat="@drawable/ic_rating_24"
+                    app:layout_constraintBottom_toBottomOf="@id/releaseDate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/releaseDate" />
+
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_vertical_space"
+                    android:paddingHorizontal="@dimen/content_space"
+                    android:text="@{movie.title}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/details_title_size"
+                    app:layout_constraintTop_toBottomOf="@id/releaseDate"
+                    tools:text="Movie Title" />
+
+                <TextView
+                    android:id="@+id/overview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_vertical_space"
+                    android:paddingHorizontal="@dimen/content_space"
+                    android:text="Overview"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/titleText"
+                    tools:text="Movie Title" />
+
+                <TextView
+                    android:id="@+id/overviewText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingHorizontal="@dimen/content_space"
+                    android:text="@{movie.overview}"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/overview"
+                    tools:text="overview" />
+
+                <TextView
+                    android:id="@+id/cast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_vertical_space"
+                    android:paddingHorizontal="@dimen/content_space"
+                    android:text="Casts"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/overviewText" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewCast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingHorizontal="@dimen/content_space"
+                    app:layout_constraintTop_toBottomOf="@id/cast" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

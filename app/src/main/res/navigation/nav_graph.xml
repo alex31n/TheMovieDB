@@ -3,26 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/HomeFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.alex.themoviedb.ui.main.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/HomeFragment"
+        android:name="com.alex.themoviedb.ui.main.home.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_HomeFragment_to_PopularFragment"
+            app:destination="@id/PopularFragment" >
+        </action>
+        <action
+            android:id="@+id/action_HomeFragment_to_DetailsFragment"
+            app:destination="@id/DetailsFragment" >
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PopularFragment"
+        android:name="com.alex.themoviedb.ui.main.popular.PopularFragment"
+        android:label="@string/popular_fragment_label"
+        tools:layout="@layout/fragment_popular">
+
+        <action
+            android:id="@+id/action_PopularFragment_to_DetailsFragment"
+            app:destination="@id/DetailsFragment" >
+        </action>
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.alex.themoviedb.ui.main.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+        android:id="@+id/DetailsFragment"
+        android:name="com.alex.themoviedb.ui.main.details.DetailsFragment"
+        android:label="@string/details_fragment_label"
+        tools:layout="@layout/fragment_details">
     </fragment>
 </navigation>
