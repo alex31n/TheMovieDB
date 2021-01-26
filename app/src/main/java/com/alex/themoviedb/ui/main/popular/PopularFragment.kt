@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.alex.themoviedb.R
 import com.alex.themoviedb.databinding.FragmentPopularBinding
 import com.alex.themoviedb.model.Movie
-import com.alex.themoviedb.ui.main.MovieAdapter
 import com.alex.themoviedb.utils.Constants
 
 
@@ -26,10 +25,19 @@ class PopularFragment : Fragment() {
     private lateinit var viewModel: PopularViewModel
     private lateinit var movieAdapter :MovieAdapter
 
+    private var TERM :String?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+            TERM = arguments?.getString(Constants.KEY_TERM, Constants.TERM_POPULAR)
+
         viewModel = ViewModelProvider(this).get(PopularViewModel::class.java)
         movieAdapter = MovieAdapter(this::movieItemClick)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.unbind()
     }
 
     override fun onCreateView(
@@ -53,7 +61,10 @@ class PopularFragment : Fragment() {
 
         observeData()
 
-        viewModel.searchMovies(Constants.TERM_POPULAR)
+        TERM?.let {
+            viewModel.searchMovies(TERM.toString())
+        }
+
 
     }
 
@@ -69,7 +80,7 @@ class PopularFragment : Fragment() {
     private fun movieItemClick(movie: Movie){
 //        Log.d(TAG, "movieItemClick: $movie")
 //        val bundle = bundleOf("id" to movie.id)
-        val bundle = bundleOf("movie" to movie)
+        val bundle = bundleOf(Constants.KEY_MOVIE to movie)
         findNavController().navigate(R.id.action_PopularFragment_to_DetailsFragment,bundle)
     }
 

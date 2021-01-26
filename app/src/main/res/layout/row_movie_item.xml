@@ -28,7 +28,8 @@
                 android:id="@+id/thumbnailImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                image="@{`https://image.tmdb.org/t/p/w342`+movie.image}"/>
+                image="@{`https://image.tmdb.org/t/p/w342`+movie.image}"
+                android:scaleType="centerCrop"/>
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -43,7 +44,8 @@
             tools:text="Test Title"
             android:textColor="@color/white"
             android:textSize="@dimen/thumbnail_title_size"
-            android:layout_marginVertical="@dimen/thumbnail_vertical_space"/>
+            android:layout_marginVertical="@dimen/thumbnail_vertical_space"
+            android:lines="2"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

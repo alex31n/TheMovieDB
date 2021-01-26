@@ -3,10 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/HomeFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/HomeFragment"
+        android:name="com.alex.themoviedb.ui.main.home.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_PopularFragment"
+            app:destination="@id/PopularFragment" >
+        </action>
+        <action
+            android:id="@+id/action_HomeFragment_to_DetailsFragment"
+            app:destination="@id/DetailsFragment" >
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PopularFragment"
         android:name="com.alex.themoviedb.ui.main.popular.PopularFragment"
         android:label="@string/popular_fragment_label"
         tools:layout="@layout/fragment_popular">

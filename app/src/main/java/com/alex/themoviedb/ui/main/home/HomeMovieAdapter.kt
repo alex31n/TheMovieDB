@@ -1,4 +1,4 @@
-package com.alex.themoviedb.ui.main.popular
+package com.alex.themoviedb.ui.main.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,23 +7,26 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
 import com.alex.themoviedb.R
 import com.alex.themoviedb.databinding.RowCastItemBinding
+import com.alex.themoviedb.databinding.RowHomeMovieItemBinding
 import com.alex.themoviedb.model.Cast
+import com.alex.themoviedb.model.Movie
 
-class CastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeMovieAdapter(private val movieItemClick: (Movie) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var list: ArrayList<Cast> = ArrayList()
+    private var list  = mutableListOf<Movie>()
 
-    fun setItems(list: ArrayList<Cast>) {
-        this.list = list
+    fun setItems(list: List<Movie>) {
+        this.list.clear()
+        this.list.addAll(list)
         notifyDataSetChanged()
     }
 
-    fun addItems(items: List<Cast>) {
+    fun addItems(items: List<Movie>) {
         this.list.addAll(items)
         notifyDataSetChanged()
     }
 
-    fun getItems(): List<Cast> {
+    fun getItems(): List<Movie> {
         return this.list
     }
 
@@ -31,7 +34,7 @@ class CastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.row_cast_item,
+                R.layout.row_home_movie_item,
                 parent,
                 false
             )
@@ -39,9 +42,12 @@ class CastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val cast = this.list[position]
-        (holder as ViewHolder).bind(cast)
+        val movie = this.list[position]
+        (holder as ViewHolder).bind(movie)
 
+        holder.itemView.setOnClickListener{
+            movieItemClick(movie)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -49,16 +55,16 @@ class CastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    class ViewHolder(binding: RowCastItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(binding: RowHomeMovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val binding: RowCastItemBinding = binding
+        private val binding: RowHomeMovieItemBinding = binding
 
-        fun bind(cast: Cast) {
-            binding.setVariable(BR.cast, cast)
+        fun bind(movie: Movie) {
+            binding.setVariable(BR.movie, movie)
             binding.executePendingBindings()
         }
 
-        fun getBinding(): RowCastItemBinding {
+        fun getBinding(): RowHomeMovieItemBinding {
             return binding
         }
 

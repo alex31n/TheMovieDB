@@ -1,4 +1,4 @@
-package com.alex.themoviedb.ui.main
+package com.alex.themoviedb.ui.main.popular
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -48,7 +48,8 @@ class MovieAdapter(private val movieItemClick: (Movie) -> Unit) :
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
             override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean =
-                oldItem.id == newItem.id
+//                oldItem.id == newItem.id
+                oldItem == newItem
 
             override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
                 oldItem == newItem

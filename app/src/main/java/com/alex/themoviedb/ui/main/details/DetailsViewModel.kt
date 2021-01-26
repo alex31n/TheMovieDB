@@ -18,9 +18,9 @@ class DetailsViewModel : ViewModel() {
 
     val castResult: MutableLiveData<CastResult> = MutableLiveData()
 
-    public fun getCredits(id: Int) {
+    public fun getCredits(movieId: Int) {
         compositeDisposable.add(
-            movieApi.getMovieCredit(id)
+            movieApi.getMovieCredit(movieId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(

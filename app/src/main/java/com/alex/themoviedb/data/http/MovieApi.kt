@@ -14,6 +14,12 @@ interface MovieApi {
     @GET("movie/popular?api_key=" + Constants.API_KEY)
     fun getPopularMovies(@Query("page") page: Int): Single<Response<Movies>>
 
+    @GET("movie/upcoming?api_key=" + Constants.API_KEY)
+    fun getUpcomingMovies(@Query("page") page: Int): Single<Response<Movies>>
+
+    @GET("movie/top_rated?api_key=" + Constants.API_KEY)
+    fun getTopRatedMovies(@Query("page") page: Int): Single<Response<Movies>>
+
     @GET("movie/{id}/credits?api_key=" + Constants.API_KEY)
     fun getMovieCredit(@Path("id") id :Int): Single<Response<CastResult>>
 

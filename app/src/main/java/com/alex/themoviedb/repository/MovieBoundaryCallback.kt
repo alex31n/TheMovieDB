@@ -30,19 +30,22 @@ class MovieBoundaryCallback(
 
     override fun onZeroItemsLoaded() {
         Log.d(TAG, "onZeroItemsLoaded: ")
-        requestData(term,1)
+        requestData(term, 1)
     }
 
     override fun onItemAtEndLoaded(itemAtEnd: Movie) {
         Log.d(TAG, "onItemAtEndLoaded: $itemAtEnd")
-        requestData(term, itemAtEnd.page+1)
+        requestData(term, itemAtEnd.page + 1)
     }
 
-    private fun requestData(term: String, page:Int) {
+    private fun requestData(term: String, page: Int) {
         _networkState.postValue(NetworkState.LOADING)
-//        if (term.equals(Constants.TERM_POPULAR,true)){
-            handleResponse(term, webservice.getPopularMovies(page))
-//        }
+        when (term) {
+            Constants.TERM_POPULAR -> handleResponse(term, webservice.getPopularMovies(page))
+            Constants.TERM_UPCOMING -> handleResponse(term, webservice.getUpcomingMovies(page))
+            Constants.TERM_TOP_RATED -> handleResponse(term, webservice.getTopRatedMovies(page))
+        }
+
 
     }
 }

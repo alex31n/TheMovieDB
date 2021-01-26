@@ -8,7 +8,6 @@ import com.alex.themoviedb.model.ListingResult
 import com.alex.themoviedb.model.Movie
 import com.alex.themoviedb.model.MovieResult
 import com.alex.themoviedb.model.Movies
-import com.alex.themoviedb.ui.main.MovieAdapter
 import com.alex.themoviedb.utils.Constants
 import com.alex.themoviedb.utils.app.MyApplication
 import io.reactivex.Single

@@ -1,19 +1,17 @@
 package com.alex.themoviedb.ui.main.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alex.themoviedb.R
 import com.alex.themoviedb.databinding.FragmentDetailsBinding
 import com.alex.themoviedb.model.Movie
-import com.alex.themoviedb.ui.main.popular.CastAdapter
+import com.alex.themoviedb.utils.Constants
 
 private const val TAG = "DetailsFragment"
 
@@ -28,9 +26,13 @@ class DetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        movie = arguments?.getParcelable("movie")
+        movie = arguments?.getParcelable(Constants.KEY_MOVIE)
         detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.unbind()
     }
 
     override fun onCreateView(
@@ -49,7 +51,7 @@ class DetailsFragment : Fragment() {
 
         }
 
-        movie?.id?.let {
+        movie?.movieId?.let {
             detailsViewModel.getCredits(it)
         }
         initView()
