@@ -1,12 +1,12 @@
 package com.alex.themoviedb.ui.main.popular
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,7 +15,6 @@ import com.alex.themoviedb.R
 import com.alex.themoviedb.databinding.FragmentPopularBinding
 import com.alex.themoviedb.model.Movie
 import com.alex.themoviedb.utils.Constants
-import org.apache.commons.lang3.StringUtils
 import org.apache.commons.lang3.text.WordUtils
 
 
@@ -37,11 +36,6 @@ class PopularFragment : Fragment() {
         movieAdapter = MovieAdapter(this::movieItemClick)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.unbind()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,10 +48,10 @@ class PopularFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val gridCount = requireContext().resources.getInteger(R.integer.movie_thumbnail_grid_span_count)
         binding.recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, gridCount)
             adapter = movieAdapter
         }
 
@@ -65,7 +59,7 @@ class PopularFragment : Fragment() {
 
         TERM?.let {
             viewModel.searchMovies(TERM.toString())
-            activity?.title= WordUtils.capitalize(TERM.toString().replace("_"," "))
+            activity?.title= WordUtils.capitalize(TERM.toString().replace("_", " "))
         }
 
 

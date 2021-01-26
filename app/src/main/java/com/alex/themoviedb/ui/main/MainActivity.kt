@@ -1,5 +1,6 @@
 package com.alex.themoviedb.ui.main
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -7,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +26,5 @@ class MainActivity() : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
     }
-
-
 
 }

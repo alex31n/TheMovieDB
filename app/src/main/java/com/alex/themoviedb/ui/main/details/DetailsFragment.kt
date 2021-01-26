@@ -31,10 +31,6 @@ class DetailsFragment : Fragment() {
         detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.unbind()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

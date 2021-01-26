@@ -43,7 +43,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Test Title"
             android:textColor="@color/white"
-            android:textSize="@dimen/thumbnail_title_size"
+            android:textSize="@dimen/title_size"
             android:layout_marginVertical="@dimen/thumbnail_vertical_space"
             android:lines="2"/>
 
