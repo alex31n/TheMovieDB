@@ -35,5 +35,5 @@ object RetrofitClient {
             .build()
     }
 
-    val getMovieService: MovieService = getRetrofit().create(MovieService::class.java)
+    val GET_MOVIE_API: MovieApi = getRetrofit().create(MovieApi::class.java)
 }

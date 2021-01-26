@@ -13,7 +13,12 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment" >
+            <argument
+                android:name="id"
+                app:argType="integer"
+                android:defaultValue="0" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"

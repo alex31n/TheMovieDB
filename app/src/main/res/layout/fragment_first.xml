@@ -6,7 +6,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.FirstFragment">
+        tools:context=".ui.main.FirstFragment"
+        android:background="@color/background">
 
         <!--<TextView
             android:id="@+id/textview_first"
@@ -31,6 +32,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/content_space"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

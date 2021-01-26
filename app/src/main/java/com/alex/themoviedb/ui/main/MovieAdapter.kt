@@ -1,36 +1,22 @@
 package com.alex.themoviedb.ui.main
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alex.themoviedb.BR
 import com.alex.themoviedb.R
 import com.alex.themoviedb.databinding.RowMovieItemBinding
 import com.alex.themoviedb.model.Movie
+import kotlin.reflect.KFunction1
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+private const val TAG = "MovieAdapter"
+class MovieAdapter(private val movieItemClick: (Movie) -> Unit) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(REPO_COMPARATOR){
 
-    private var dataSet: ArrayList<Movie> = ArrayList()
-    private var context: Context? = null
 
-    fun setItems(list: ArrayList<Movie>) {
-        dataSet = list
-        notifyDataSetChanged()
-    }
-
-    fun addItems(items: List<Movie>) {
-        dataSet.addAll(items)
-        notifyDataSetChanged()
-    }
-
-    fun getItems(): List<Movie> {
-        return dataSet
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        this.context = parent.context
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
@@ -41,14 +27,33 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataSet[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val movie = getItem(position)
+         val viewHolder = holder as ViewHolder;
+//        Log.d(TAG, "onBindViewHolder: "+movie)
+        if (movie != null) {
+            viewHolder.bind(movie)
+
+            viewHolder.itemView.setOnClickListener {
+                movieItemClick(movie)
+            }
+        }
+
+
+
     }
 
-    override fun getItemCount(): Int {
-        return dataSet.size;
-    }
 
+
+    companion object {
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
+                oldItem == newItem
+        }
+    }
 
     class ViewHolder(binding: RowMovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -64,4 +69,5 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
         }
 
     }
+
 }

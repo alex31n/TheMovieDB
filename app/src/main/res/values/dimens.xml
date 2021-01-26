@@ -1,3 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="content_space">12sp</dimen>
+    <dimen name="thumbnail_title_size">18sp</dimen>
+    <dimen name="thumbnail_vertical_space">8dp</dimen>
+    <dimen name="thumbnail_item_space">8dp</dimen>
 </resources>

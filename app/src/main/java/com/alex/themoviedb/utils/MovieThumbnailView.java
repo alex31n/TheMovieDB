@@ -22,7 +22,7 @@ public class MovieThumbnailView extends androidx.appcompat.widget.AppCompatImage
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int width = getMeasuredWidth();
-        setMeasuredDimension(width, (int) (width/1.3));
+        setMeasuredDimension(width, (int) (width*1.5));
     }
 
 }
