@@ -8,6 +8,7 @@ import com.alex.themoviedb.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import org.apache.commons.lang3.StringUtils
 
 object BindingAdapterHelper {
     /*@BindingAdapter("backgroundColor")
@@ -26,11 +27,16 @@ object BindingAdapterHelper {
 @BindingAdapter("image")
 fun image(view: ImageView?, image: String?) : Unit{
 //        ImageHelper.loadImage(view, image);
+
     Glide.with(view!!.context)
         .load(image) //.placeholder(R.drawable.img_default_thumb)
         .thumbnail(0.25f)
 //            .error(R.drawable.img_default_thumb)
-        .apply(RequestOptions().error(R.drawable.img_default_thumb))
+        .apply(
+            RequestOptions()
+//            .placeholder(R.drawable.img_default_thumb)
+            .error(R.drawable.img_default_thumb)
+        )
         .transition(DrawableTransitionOptions.withCrossFade())
 //            .listener(listener)
         .into(view)

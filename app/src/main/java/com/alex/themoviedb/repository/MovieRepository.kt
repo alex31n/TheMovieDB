@@ -2,8 +2,8 @@ package com.alex.themoviedb.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.toLiveData
-import com.alex.themoviedb.data.database.dao.MovieDao
 import com.alex.themoviedb.data.http.RetrofitClient
 import com.alex.themoviedb.model.ListingResult
 import com.alex.themoviedb.model.Movie
@@ -16,7 +16,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
-import retrofit2.Retrofit
 import java.util.concurrent.Executors
 
 private const val TAG = "MovieRepository"
@@ -70,7 +69,7 @@ class MovieRepository {
         return movieDao.getByRandomTerm(term)
     }
 
-    private fun handleResponse(term: String, callback: Single<Response<Movies>>) {
+    private fun handleResponse(term: String, callback: Single<Response<Movies>>, networkState: MutableLiveData<NetworkState>) {
         compositeDisposable.add(
             callback
                 .observeOn(AndroidSchedulers.mainThread())
@@ -85,13 +84,16 @@ class MovieRepository {
                                 val listing = ListingResult(movies.results, movies.page, term)
                                 insertIntoDB(listing)
                             }
+                            networkState.value = NetworkState.SUCCESS
 
                         } else {
                             Log.e(TAG, "getMoviesFromRemote: " + response.errorBody()?.string())
+                            networkState.value = NetworkState.error(response.errorBody()?.string())
                         }
                     },
                     { t ->
                         Log.e(TAG, "getMoviesFromRemote error: ", t)
+                        networkState.value = NetworkState.error(t.message)
                     }
                 )
         )

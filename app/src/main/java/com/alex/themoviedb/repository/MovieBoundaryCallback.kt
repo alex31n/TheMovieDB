@@ -17,7 +17,7 @@ private const val TAG = "MovieBoundaryCallback"
 class MovieBoundaryCallback(
     private val term: String,
     private val webservice: MovieApi,
-    private val handleResponse: (String, Single<Response<Movies>>) -> Unit,
+    private val handleResponse: (String, Single<Response<Movies>>, networkState: MutableLiveData<NetworkState>) -> Unit,
     private val ioExecutor: Executor,
     private val networkPageSize: Int
 ) : PagedList.BoundaryCallback<Movie>() {
@@ -39,11 +39,15 @@ class MovieBoundaryCallback(
     }
 
     private fun requestData(term: String, page: Int) {
+        if (_networkState.value == NetworkState.LOADING){
+            return
+        }
+
         _networkState.postValue(NetworkState.LOADING)
         when (term) {
-            Constants.TERM_POPULAR -> handleResponse(term, webservice.getPopularMovies(page))
-            Constants.TERM_UPCOMING -> handleResponse(term, webservice.getUpcomingMovies(page))
-            Constants.TERM_TOP_RATED -> handleResponse(term, webservice.getTopRatedMovies(page))
+            Constants.TERM_POPULAR -> handleResponse(term, webservice.getPopularMovies(page),_networkState)
+            Constants.TERM_UPCOMING -> handleResponse(term, webservice.getUpcomingMovies(page),_networkState)
+            Constants.TERM_TOP_RATED -> handleResponse(term, webservice.getTopRatedMovies(page),_networkState)
         }
 
 
