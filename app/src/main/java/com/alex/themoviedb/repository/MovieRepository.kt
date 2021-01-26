@@ -34,7 +34,7 @@ class MovieRepository {
             executor.execute {
                 db.runInTransaction {
                     val start = movieDao.getMaxIndexInTerm(listingResult.term)
-                    listingResult.items.mapIndexed { index,item ->
+                    listingResult.items.mapIndexed { index, item ->
                         item.term = listingResult.term
                         item.page = listingResult.page
                         item.indexInResponse = start + index
@@ -73,9 +73,9 @@ class MovieRepository {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     { response ->
-                        Log.d(TAG, "handleResponse url: "+response.raw().request().url())
+                        Log.d(TAG, "handleResponse url: " + response.raw().request().url())
                         if (response.isSuccessful) {
-                            Log.d(TAG, "handleResponse url: "+response.body())
+                            Log.d(TAG, "handleResponse url: " + response.body())
                             val movies = response.body()
                             if (movies != null) {
                                 val listing = ListingResult(movies.results, movies.page, term)
@@ -93,7 +93,7 @@ class MovieRepository {
         )
     }
 
-    public fun onCleared(){
+    public fun onCleared() {
         compositeDisposable.dispose()
     }
 }

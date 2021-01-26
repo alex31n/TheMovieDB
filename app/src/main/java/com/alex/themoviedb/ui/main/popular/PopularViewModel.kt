@@ -1,4 +1,4 @@
-package com.alex.themoviedb.ui.main
+package com.alex.themoviedb.ui.main.popular
 
 import androidx.lifecycle.*
 import androidx.paging.PagedList
@@ -9,12 +9,12 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "MainViewModel"
 
-class MainViewModel : ViewModel() {
+class PopularViewModel : ViewModel() {
 
     private val movieRepository = MovieRepository()
 
     private val termLiveData = MutableLiveData<String>()
-    public val movieResult : LiveData<MovieResult> = Transformations.map(termLiveData) {
+     val movieResult : LiveData<MovieResult> = Transformations.map(termLiveData) {
         movieRepository.getMovies(it)
     }
 

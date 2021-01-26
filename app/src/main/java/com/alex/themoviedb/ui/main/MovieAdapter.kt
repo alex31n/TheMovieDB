@@ -13,7 +13,9 @@ import com.alex.themoviedb.model.Movie
 import kotlin.reflect.KFunction1
 
 private const val TAG = "MovieAdapter"
-class MovieAdapter(private val movieItemClick: (Movie) -> Unit) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(REPO_COMPARATOR){
+
+class MovieAdapter(private val movieItemClick: (Movie) -> Unit) :
+    PagedListAdapter<Movie, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -29,7 +31,7 @@ class MovieAdapter(private val movieItemClick: (Movie) -> Unit) : PagedListAdapt
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val movie = getItem(position)
-         val viewHolder = holder as ViewHolder;
+        val viewHolder = holder as ViewHolder;
 //        Log.d(TAG, "onBindViewHolder: "+movie)
         if (movie != null) {
             viewHolder.bind(movie)
@@ -40,9 +42,7 @@ class MovieAdapter(private val movieItemClick: (Movie) -> Unit) : PagedListAdapt
         }
 
 
-
     }
-
 
 
     companion object {

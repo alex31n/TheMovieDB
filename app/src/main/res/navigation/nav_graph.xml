@@ -7,27 +7,19 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.alex.themoviedb.ui.main.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:name="com.alex.themoviedb.ui.main.popular.PopularFragment"
+        android:label="@string/popular_fragment_label"
+        tools:layout="@layout/fragment_popular">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" >
-            <argument
-                android:name="id"
-                app:argType="integer"
-                android:defaultValue="0" />
+            android:id="@+id/action_PopularFragment_to_DetailsFragment"
+            app:destination="@id/DetailsFragment" >
         </action>
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.alex.themoviedb.ui.main.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+        android:id="@+id/DetailsFragment"
+        android:name="com.alex.themoviedb.ui.main.details.DetailsFragment"
+        android:label="@string/details_fragment_label"
+        tools:layout="@layout/fragment_details">
     </fragment>
 </navigation>
