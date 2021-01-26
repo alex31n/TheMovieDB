@@ -17,6 +17,7 @@ class HomeViewModel : ViewModel() {
     val pagedListPopularMovies = movieRepository.getMovies(Constants.TERM_POPULAR)
     val pagedListUpcomingMovies = movieRepository.getMovies(Constants.TERM_UPCOMING)
     val pagedListTopRatedMovies = movieRepository.getMovies(Constants.TERM_TOP_RATED)
+    val sliderMovies = movieRepository.getRandomMoviesByTerm(Constants.TERM_UPCOMING)
 
     override fun onCleared() {
         super.onCleared()

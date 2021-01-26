@@ -1,94 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.main.home.HomeFragment"
             android:background="@color/background"
-            android:padding="@dimen/content_space">
+            tools:context=".ui.main.home.HomeFragment">
 
-            <TextView
-                android:id="@+id/popular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/imageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="Popular Movies"
-                android:textSize="@dimen/thumbnail_title_size"
-                android:textColor="@color/white"/>
-            <TextView
-                android:id="@+id/popularSeeAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/popular"
-                app:layout_constraintBottom_toBottomOf="@id/popular"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="See All"
-                android:textSize="@dimen/thumbnail_title_size"
-                android:textColor="@color/white" />
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="false"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="30dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="2"
+                app:sliderStartAutoCycle="true" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewPopular"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/popular"/>
+                android:background="@color/background"
+                android:padding="@dimen/content_space"
+                app:layout_constraintTop_toBottomOf="@id/imageSlider"
+                tools:context=".ui.main.home.HomeFragment">
 
-            <TextView
-                android:id="@+id/upcoming"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/recyclerViewPopular"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="Upcoming Movies"
-                android:textSize="@dimen/thumbnail_title_size"
-                android:textColor="@color/white"
-                android:layout_marginTop="@dimen/item_vertical_space"/>
-            <TextView
-                android:id="@+id/upcomingSeeAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/upcoming"
-                app:layout_constraintBottom_toBottomOf="@id/upcoming"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="See All"
-                android:textSize="@dimen/thumbnail_title_size"
-                android:textColor="@color/white" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewUpcoming"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/upcoming"/>
-            <TextView
-                android:id="@+id/topRated"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/recyclerViewUpcoming"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="Upcoming Movies"
-                android:textSize="@dimen/thumbnail_title_size"
-                android:textColor="@color/white"
-                android:layout_marginTop="@dimen/item_vertical_space"/>
-            <TextView
-                android:id="@+id/topRatedSeeAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/topRated"
-                app:layout_constraintBottom_toBottomOf="@id/topRated"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="See All"
-                android:textSize="@dimen/thumbnail_title_size"
-                android:textColor="@color/white" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewTopRated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/topRated"/>
+                <TextView
+                    android:id="@+id/popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_vertical_space"
+                    android:text="Popular Movies"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/thumbnail_title_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/popularSeeAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/thumbnail_title_size"
+                    app:layout_constraintBottom_toBottomOf="@id/popular"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/popular" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewPopular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/popular" />
+
+                <TextView
+                    android:id="@+id/upcoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_vertical_space"
+                    android:text="Upcoming Movies"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/thumbnail_title_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerViewPopular" />
+
+                <TextView
+                    android:id="@+id/upcomingSeeAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/thumbnail_title_size"
+                    app:layout_constraintBottom_toBottomOf="@id/upcoming"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/upcoming" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewUpcoming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/upcoming" />
+
+                <TextView
+                    android:id="@+id/topRated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_vertical_space"
+                    android:text="Top Rated Movies"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/thumbnail_title_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerViewUpcoming" />
+
+                <TextView
+                    android:id="@+id/topRatedSeeAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/thumbnail_title_size"
+                    app:layout_constraintBottom_toBottomOf="@id/topRated"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/topRated" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewTopRated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/topRated" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

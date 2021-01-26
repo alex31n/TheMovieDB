@@ -1,6 +1,7 @@
 package com.alex.themoviedb.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.paging.toLiveData
 import com.alex.themoviedb.data.database.dao.MovieDao
 import com.alex.themoviedb.data.http.RetrofitClient
@@ -63,6 +64,10 @@ class MovieRepository {
         )
 
         return MovieResult(livePagedList, boundaryCallback.networkState)
+    }
+
+    public fun getRandomMoviesByTerm(term: String):LiveData<List<Movie>>{
+        return movieDao.getByRandomTerm(term)
     }
 
     private fun handleResponse(term: String, callback: Single<Response<Movies>>) {

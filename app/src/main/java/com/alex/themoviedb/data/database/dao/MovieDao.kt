@@ -32,4 +32,8 @@ interface MovieDao {
 
     @Query("SELECT MAX(indexInResponse) + 1 FROM movie WHERE term = :term")
     fun getMaxIndexInTerm(term:String) : Int
+
+    @Query("select * from movie WHERE term = :term ORDER BY RANDOM() LIMIT 5")
+    fun getByRandomTerm(term:String): LiveData<List<Movie>>
+
 }

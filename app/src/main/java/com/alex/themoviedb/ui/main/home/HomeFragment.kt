@@ -14,6 +14,8 @@ import com.alex.themoviedb.R
 import com.alex.themoviedb.databinding.FragmentHomeBinding
 import com.alex.themoviedb.model.Movie
 import com.alex.themoviedb.utils.Constants
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
+import com.smarteist.autoimageslider.SliderAnimations
 
 private const val TAG = "HomeFragment"
 
@@ -24,12 +26,14 @@ class HomeFragment : Fragment() {
     private lateinit var popularMovieAdapter: HomeMovieAdapter
     private lateinit var upcomingMovieAdapter: HomeMovieAdapter
     private lateinit var topRatedMovieAdapter: HomeMovieAdapter
+    private lateinit var sliderMovieAdapter: SliderAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         popularMovieAdapter = HomeMovieAdapter(this::onMovieClick)
         upcomingMovieAdapter = HomeMovieAdapter(this::onMovieClick)
         topRatedMovieAdapter = HomeMovieAdapter(this::onMovieClick)
+        sliderMovieAdapter = SliderAdapter(this::onMovieClick)
     }
 
     override fun onCreateView(
@@ -74,6 +78,12 @@ class HomeFragment : Fragment() {
             adapter = topRatedMovieAdapter
         }
 
+        binding.imageSlider.apply {
+//            setIndicatorAnimation(IndicatorAnimationType.WORM);
+            setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+            setSliderAdapter(sliderMovieAdapter)
+        }
+
         binding.popularSeeAll.setOnClickListener {
             showAllMovies(Constants.TERM_POPULAR)
         }
@@ -84,6 +94,7 @@ class HomeFragment : Fragment() {
         binding.topRatedSeeAll.setOnClickListener {
             showAllMovies(Constants.TERM_TOP_RATED)
         }
+
 
     }
 
@@ -112,6 +123,12 @@ class HomeFragment : Fragment() {
             }
         })
 
+        viewModel.sliderMovies.observe(viewLifecycleOwner,{
+            if (it?.size!!>0){
+                sliderMovieAdapter.newItems(it)
+            }
+        })
+
     }
 
     private fun onMovieClick(movie: Movie) {
@@ -119,5 +136,15 @@ class HomeFragment : Fragment() {
         findNavController().navigate(R.id.action_HomeFragment_to_DetailsFragment, bundle)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        binding.imageSlider.startAutoCycle();
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.imageSlider.stopAutoCycle()
+    }
 
 }
